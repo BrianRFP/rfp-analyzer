@@ -7,9 +7,8 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Check out code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -20,17 +19,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Download the RFP file from Cloudflare R2
-        env:
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: |
-          # Install AWS CLI (compatible with R2)
-          pip install awscli
-          
-          # Use AWS CLI to download file from R2 (adjust for your bucket and file path)
-          aws --endpoint-url=https://<your-cloudflare-r2-endpoint> s3 cp s3://rfp-uploads/${{ github.event.client_payload.filename }} rfp_file.pdf
-
       - name: Run analysis script
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -39,4 +27,5 @@ jobs:
         run: |
           python3 scripts/extract_and_analyze.py \
             --payload-path "$GITHUB_EVENT_PATH"
+
 
