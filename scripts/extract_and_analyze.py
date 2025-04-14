@@ -19,7 +19,7 @@ def call_claude(prompt: str) -> str:
         "Content-Type": "application/json"
     }
     data = {
-        "model": "claude-v1",  # Specify Claude model version
+        "model": "Claude 3.5",  # Specify Claude model version
         "prompt": prompt,
         "max_tokens": 1000,  # Adjust based on your requirement
         "temperature": 0.7,  # Adjust based on your requirement
