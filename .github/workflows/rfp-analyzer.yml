@@ -1,0 +1,29 @@
+name: RFP Analyzer
+
+on:
+  repository_dispatch:
+    types: [rfp-submitted]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run analysis script
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GMAIL_USER:     ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS:     ${{ secrets.GMAIL_PASS }}
+        run: |
+          python3 scripts/extract_and_analyze.py \
+            --payload-path "$GITHUB_EVENT_PATH"
