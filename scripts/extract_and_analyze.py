@@ -44,7 +44,7 @@ prompts = [
     # Prompt 3: Extract Requirements
     "Extract each requirement that the responding party needs to fulfill. Organize them into a bulleted list or table format, categorizing them by functional, technical, and compliance requirements.",
     # Prompt 4: Compliance Matrix
-    "Using the extracted requirements, create a compliance matrix with the following columns: Requirement, Compliance (Yes/No/Partial), Notes or Additional Information Don't fill in the table, other than the first column ("Requirement").",
+    "Using the extracted requirements, create a compliance matrix with the following columns: Requirement, Compliance (Yes/No/Partial), Notes or Additional Information Don't fill in the table, other than the first column (Requirement).",
     # Prompt 5: Go/No-Go Questions
     "For each section, produce a list of questions that your client must answer in order for you to draft their response. The list of questions must be comprehensive and complete: if all of the questions for a given section are answered by your client, you should have enough information to draft that section of the document. Just provide the list of questions organized by section. Don't give a preamble or summary.",
     #Prompt 6: Another Prompt
