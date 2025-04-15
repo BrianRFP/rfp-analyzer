@@ -74,7 +74,23 @@ msg = EmailMessage()
 msg["Subject"] = "Your RFP Analysis"
 msg["From"]    = os.environ["GMAIL_USER"]
 msg["To"]      = email
-msg.set_content(analysis_html)
+
+text = analysis_md
+html = """\
+<html>
+  <head></head>
+  <body>
+""" + analysis_html + """\
+  </body>
+</html>
+"""
+
+part1 = MIMEText(text, 'plain')
+part2 = MIMEText(html, 'html')
+
+msg.attach(part1)
+msg.attach(part2)
+
 
 with smtplib.SMTP("smtp.gmail.com", 587) as s:
     s.starttls()
