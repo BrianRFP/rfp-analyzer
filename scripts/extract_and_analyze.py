@@ -6,6 +6,8 @@ import argparse
 import requests
 import markdown
 from email.message import EmailMessage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from PyPDF2 import PdfReader
 from docx import Document
 from openai import OpenAI
@@ -70,7 +72,7 @@ analysis_html = markdown.markdown(analysis_md)
 
 
 # Build email message and send via Gmail SMTP
-msg = EmailMessage()
+msg = MIMEMultipart('alternative')
 msg["Subject"] = "Your RFP Analysis"
 msg["From"]    = os.environ["GMAIL_USER"]
 msg["To"]      = email
