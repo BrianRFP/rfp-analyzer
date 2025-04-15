@@ -4,6 +4,7 @@ import io
 import smtplib
 import argparse
 import requests
+import markdown
 from email.message import EmailMessage
 from PyPDF2 import PdfReader
 from docx import Document
@@ -65,12 +66,15 @@ for user_prompt in prompts:
 # Combine all responses into one markdown document
 analysis_md = "\n\n---\n\n".join(responses)
 
+analysis_html = markdown.markdown(analysis_md)
+
+
 # Build email message and send via Gmail SMTP
 msg = EmailMessage()
 msg["Subject"] = "Your RFP Analysis"
 msg["From"]    = os.environ["GMAIL_USER"]
 msg["To"]      = email
-msg.set_content(analysis_md)
+msg.set_content(analysis_html)
 
 with smtplib.SMTP("smtp.gmail.com", 587) as s:
     s.starttls()
