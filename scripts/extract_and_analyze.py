@@ -52,7 +52,7 @@ prompts = [
 responses = []
 for user_prompt in prompts:
     resp = client.chat.completions.create(
-        model="gpt-4.0",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are an RFP analyzer. Output only markdown—no preamble or explanation."},
             {"role": "user", "content": user_prompt + "\n\n" + text}
